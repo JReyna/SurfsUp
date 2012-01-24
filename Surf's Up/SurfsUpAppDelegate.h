@@ -1,5 +1,5 @@
 //
-//  main.m
+//  SurfsUpAppDelegate.h
 //  Surf's Up
 //
 //  Created by Steven Baranski on 9/16/11.
@@ -14,15 +14,9 @@
 // THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+@interface SurfsUpAppDelegate : UIResponder <UIApplicationDelegate>
 
-#import "SurfsUpAppDelegate.h"
+@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIViewController *viewController;
 
-int main(int argc, char *argv[])
-{
-    int retVal = 0;
-    @autoreleasepool {
-        retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([SurfsUpAppDelegate class]));
-    }
-    return retVal;
-}
+@end

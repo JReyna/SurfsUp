@@ -1,5 +1,5 @@
 //
-//  main.m
+//  DetailViewController.h
 //  Surf's Up
 //
 //  Created by Steven Baranski on 9/16/11.
@@ -14,15 +14,9 @@
 // THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
-
-#import "SurfsUpAppDelegate.h"
-
-int main(int argc, char *argv[])
+@interface DetailViewController : UIViewController
 {
-    int retVal = 0;
-    @autoreleasepool {
-        retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([SurfsUpAppDelegate class]));
-    }
-    return retVal;
+    IBOutlet UISwitch *rentSwitch;
 }
+
+@end

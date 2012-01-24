@@ -1,5 +1,5 @@
 //
-//  main.m
+//  DetailViewController.m
 //  Surf's Up
 //
 //  Created by Steven Baranski on 9/16/11.
@@ -14,15 +14,23 @@
 // THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+#import "DetailViewController.h"
 
-#import "SurfsUpAppDelegate.h"
+@implementation DetailViewController
 
-int main(int argc, char *argv[])
+#pragma mark - Rotation
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    int retVal = 0;
-    @autoreleasepool {
-        retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([SurfsUpAppDelegate class]));
-    }
-    return retVal;
+    return YES;
 }
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [[self view] setBackgroundColor:[UIColor
+              colorWithPatternImage:[UIImage imageNamed:@"bg_sand"]]];
+}
+
+
+@end
