@@ -49,7 +49,13 @@
       UITextAttributeTextShadowOffset,
       [UIFont fontWithName:@"Arial-Bold" size:0.0], 
       UITextAttributeFont,
-      nil]]; 
+      nil]];
+    
+    UIImage *tabBackground = [[UIImage imageNamed:@"tab_bg"]
+                              resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [[UITabBar appearance] setBackgroundImage:tabBackground];
+    [[UITabBar appearance] setSelectionIndicatorImage:
+     [UIImage imageNamed:@"tab_select_indicator"]];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
