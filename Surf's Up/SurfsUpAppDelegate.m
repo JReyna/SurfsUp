@@ -56,6 +56,16 @@
     [[UITabBar appearance] setBackgroundImage:tabBackground];
     [[UITabBar appearance] setSelectionIndicatorImage:
      [UIImage imageNamed:@"tab_select_indicator"]];
+    
+    UIImage *minImage = [[UIImage imageNamed:@"slider_minimum.png"] 
+                         resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
+    UIImage *maxImage = [[UIImage imageNamed:@"slider_maximum.png"]
+                         resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
+    UIImage *thumbImage = [UIImage imageNamed:@"thumb.png"];
+    
+    [[UISlider appearance] setMaximumTrackImage:maxImage forState:UIControlStateNormal];
+    [[UISlider appearance] setMinimumTrackImage:minImage forState:UIControlStateNormal];
+    [[UISlider appearance] setThumbImage:thumbImage forState:UIControlStateNormal];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
