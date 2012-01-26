@@ -105,6 +105,11 @@
     
     SurfsUpViewController *vc = [[SurfsUpViewController alloc] initWithStyle:UITableViewStylePlain];
     [vc setTitle:@"Surf's Up"];
+    
+    // Customizing the UINavigationBar Title
+    [[vc navigationItem] setTitleView:
+     [[UIImageView alloc] initWithImage:
+      [UIImage imageNamed:@"title.png"]]];
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:vc];
     [self setViewController:navVC];
     
