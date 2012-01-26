@@ -20,7 +20,7 @@
 #import "PlaceholderViewController.h"
 #import "CustomCell.h"
 
-// Add constants for each of our reuse identifiers, right after the // imports (we added these in Interface Builder earlier)
+// Add constants for each of our reuse identifiers, right after the imports (we added these in Interface Builder earlier)
 NSString * const REUSE_ID_TOP = @"TopRow";
 NSString * const REUSE_ID_MIDDLE = @"MiddleRow";
 NSString * const REUSE_ID_BOTTOM = @"BottomRow"; 
