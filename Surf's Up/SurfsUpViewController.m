@@ -83,8 +83,7 @@ NSString * const REUSE_ID_SINGLE = @"SingleRow";
     
     UINib *singleNib = [UINib nibWithNibName:REUSE_ID_SINGLE bundle:classBundle];
     [[self tableView] registerNib:singleNib forCellReuseIdentifier:REUSE_ID_SINGLE];
-    // add to the end of viewDidLoad
-    [self registerNIBs];
+
 }
 
 
@@ -93,6 +92,12 @@ NSString * const REUSE_ID_SINGLE = @"SingleRow";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //James, the two lines below were removed from the method "registerNibs". This
+    //was causing the loop I spotted when in the debug session with you.
+    
+    // add to the end of viewDidLoad
+    [self registerNIBs];
 }
 
 // adding code to register our NIB for use
