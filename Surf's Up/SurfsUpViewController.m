@@ -28,7 +28,7 @@ NSString * const REUSE_ID_SINGLE = @"SingleRow";
 
 @implementation SurfsUpViewController
 
-#pragma mark - Private behavior and "Model" methods
+#pragma mark - Private behavior and "Model" methodz
 
 - (NSString *)tripNameForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -37,12 +37,15 @@ NSString * const REUSE_ID_SINGLE = @"SingleRow";
         case 0:
             return @"Kuta, Bali";
             break;
+            
         case 1:
             return @"Lagos, Portugal";
             break;
+            
         case 2:
             return @"Waikiki, Hawaii";
             break;
+            
     }
     return @"-";
 }
