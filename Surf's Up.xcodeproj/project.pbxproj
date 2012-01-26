@@ -52,6 +52,11 @@
 		16C4A8D013BE904D007501D9 /* SurfsUpViewController.h in Resources */ = {isa = PBXBuildFile; fileRef = 16C4A8CF13BE904D007501D9 /* SurfsUpViewController.h */; };
 		16C4A8D213BE904D007501D9 /* SurfsUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4A8D113BE904D007501D9 /* SurfsUpViewController.m */; };
 		E15ADA9E144236B6009760D0 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E15ADA9D144236B6009760D0 /* Icon.png */; };
+		E72B1F9714D1B278009C43AA /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E72B1F9614D1B278009C43AA /* CustomCell.m */; };
+		E72B1F9914D1B650009C43AA /* TopRow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E72B1F9814D1B650009C43AA /* TopRow.xib */; };
+		E72B1F9D14D1B9B9009C43AA /* SingleRow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E72B1F9A14D1B9B9009C43AA /* SingleRow.xib */; };
+		E72B1F9E14D1B9B9009C43AA /* MiddleRow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E72B1F9B14D1B9B9009C43AA /* MiddleRow.xib */; };
+		E72B1F9F14D1B9B9009C43AA /* BottomRow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E72B1F9C14D1B9B9009C43AA /* BottomRow.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +112,12 @@
 		16C4A8CF13BE904D007501D9 /* SurfsUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SurfsUpViewController.h; sourceTree = "<group>"; };
 		16C4A8D113BE904D007501D9 /* SurfsUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SurfsUpViewController.m; sourceTree = "<group>"; };
 		E15ADA9D144236B6009760D0 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		E72B1F9514D1B278009C43AA /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		E72B1F9614D1B278009C43AA /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
+		E72B1F9814D1B650009C43AA /* TopRow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopRow.xib; sourceTree = "<group>"; };
+		E72B1F9A14D1B9B9009C43AA /* SingleRow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleRow.xib; sourceTree = "<group>"; };
+		E72B1F9B14D1B9B9009C43AA /* MiddleRow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MiddleRow.xib; sourceTree = "<group>"; };
+		E72B1F9C14D1B9B9009C43AA /* BottomRow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomRow.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +211,7 @@
 		16C4A8C313BE904D007501D9 /* Surf's Up */ = {
 			isa = PBXGroup;
 			children = (
+				E72B1F9314D1B220009C43AA /* Custom Cells */,
 				16C4A8C413BE904D007501D9 /* Supporting Files */,
 				166BB13113BE93EB00D26DC1 /* Images */,
 				169AF03C13C29CE2002BB733 /* Custom Views */,
@@ -213,6 +225,10 @@
 				166BB18513BEB23400D26DC1 /* PlaceholderViewController.h */,
 				166BB18613BEB23400D26DC1 /* PlaceholderViewController.m */,
 				166BB18713BEB23400D26DC1 /* PlaceholderView.xib */,
+				E72B1F9B14D1B9B9009C43AA /* MiddleRow.xib */,
+				E72B1F9A14D1B9B9009C43AA /* SingleRow.xib */,
+				E72B1F9C14D1B9B9009C43AA /* BottomRow.xib */,
+				E72B1F9814D1B650009C43AA /* TopRow.xib */,
 			);
 			path = "Surf's Up";
 			sourceTree = "<group>";
@@ -227,6 +243,15 @@
 				16C4A8CB13BE904D007501D9 /* Surf's Up-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E72B1F9314D1B220009C43AA /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E72B1F9514D1B278009C43AA /* CustomCell.h */,
+				E72B1F9614D1B278009C43AA /* CustomCell.m */,
+			);
+			name = "Custom Cells";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,6 +341,10 @@
 				166BB18413BEAFFC00D26DC1 /* DetailView.xib in Resources */,
 				166BB18913BEB23400D26DC1 /* PlaceholderView.xib in Resources */,
 				E15ADA9E144236B6009760D0 /* Icon.png in Resources */,
+				E72B1F9914D1B650009C43AA /* TopRow.xib in Resources */,
+				E72B1F9D14D1B9B9009C43AA /* SingleRow.xib in Resources */,
+				E72B1F9E14D1B9B9009C43AA /* MiddleRow.xib in Resources */,
+				E72B1F9F14D1B9B9009C43AA /* BottomRow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +361,7 @@
 				166BB18313BEAFFC00D26DC1 /* DetailViewController.m in Sources */,
 				166BB18813BEB23400D26DC1 /* PlaceholderViewController.m in Sources */,
 				169AF03A13C29CD9002BB733 /* CustomTextField.m in Sources */,
+				E72B1F9714D1B278009C43AA /* CustomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
