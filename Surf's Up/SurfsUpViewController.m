@@ -18,6 +18,13 @@
 
 #import "DetailViewController.h"
 #import "PlaceholderViewController.h"
+#import "CustomCell.h"
+
+// Add constants for each of our reuse identifiers, right after the // imports (we added these in Interface Builder earlier)
+NSString * const REUSE_ID_TOP = @"TopRow";
+NSString * const REUSE_ID_MIDDLE = @"MiddleRow";
+NSString * const REUSE_ID_BOTTOM = @"BottomRow"; 
+NSString * const REUSE_ID_SINGLE = @"SingleRow";
 
 @implementation SurfsUpViewController
 
@@ -57,6 +64,27 @@
     return nil;
 }
 
+// adding method for integrating new nibs
+- (void)registerNIBs
+{
+    NSBundle *classBundle = [NSBundle bundleForClass: [CustomCell class]];
+    
+    UINib *topNib = [UINib nibWithNibName:REUSE_ID_TOP bundle:classBundle];
+    [[self tableView] registerNib:topNib forCellReuseIdentifier:REUSE_ID_TOP];
+    
+    UINib *middleNib = [UINib nibWithNibName:REUSE_ID_MIDDLE bundle:classBundle];
+    [[self tableView] registerNib:middleNib forCellReuseIdentifier:REUSE_ID_MIDDLE];
+    
+    UINib *bottomNib = [UINib nibWithNibName:REUSE_ID_BOTTOM bundle:classBundle];
+    [[self tableView] registerNib:bottomNib forCellReuseIdentifier:REUSE_ID_BOTTOM];
+    
+    UINib *singleNib = [UINib nibWithNibName:REUSE_ID_SINGLE bundle:classBundle];
+    [[self tableView] registerNib:singleNib forCellReuseIdentifier:REUSE_ID_SINGLE];
+    // add to the end of viewDidLoad
+    [self registerNIBs];
+}
+
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -64,6 +92,35 @@
     [super viewDidLoad];
 }
 
+// adding code to register our NIB for use
+- (NSString *)reuseIdentifierForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger rowCount = [self tableView:[self tableView] numberOfRowsInSection:0];
+    NSInteger rowIndex = indexPath.row;
+    
+    if (rowCount == 1)
+    {
+        return REUSE_ID_SINGLE;
+    }
+    if (rowIndex == 0)
+    {
+        return REUSE_ID_TOP;
+    }
+    if (rowIndex == (rowCount -1))
+    {
+        return REUSE_ID_BOTTOM;
+    }
+    return REUSE_ID_MIDDLE;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *reuseID = [self reuseIdentifierForRowAtIndexPath:indexPath];
+    UITableViewCell *cell = [[self tableView]
+                             dequeueReusableCellWithIdentifier:reuseID];
+    return cell;
+}
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -76,7 +133,7 @@
     return 3;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+/*- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -90,6 +147,7 @@
     
     return cell;
 }
+*/
 
 #pragma mark - UITableViewDelegate
 
