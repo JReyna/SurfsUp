@@ -95,9 +95,16 @@ NSString * const REUSE_ID_SINGLE = @"SingleRow";
     
     //James, the two lines below were removed from the method "registerNibs". This
     //was causing the loop I spotted when in the debug session with you.
-    
+
     // add to the end of viewDidLoad
     [self registerNIBs];
+    
+    // Code will remove additonal empty cells in the view.
+    [[self tableView] setSeparatorStyle:
+     UITableViewCellSeparatorStyleNone];
+    [[self tableView] setBackgroundView:
+     [[UIImageView alloc] initWithImage:
+      [UIImage imageNamed:@"bg_sand.png"]]];
 }
 
 // adding code to register our NIB for use
@@ -121,6 +128,66 @@ NSString * const REUSE_ID_SINGLE = @"SingleRow";
     return REUSE_ID_MIDDLE;
 }
 
+- (UIImage *)backgroundImageForRowAtIndexPath:
+    (NSIndexPath *)indexPath
+{
+        NSString *reuseID =
+    [self reuseIdentifierForRowAtIndexPath:indexPath];
+    if ([REUSE_ID_SINGLE isEqualToString:reuseID] == YES)
+    {
+        UIImage *background = [UIImage imageNamed:@"table_cell_single.png"];
+        return [background resizableImageWithCapInsets:
+                UIEdgeInsetsMake(0.0, 43.0, 0.0, 64.0)];
+    }
+    else if ([REUSE_ID_TOP isEqualToString:reuseID] == YES)
+    {
+        UIImage *background = [UIImage imageNamed:@"table_cell_top.png"];
+        return [background resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 43.0, 0.0, 64.0)];
+    }
+    else if ([REUSE_ID_BOTTOM isEqualToString:reuseID] == YES)
+    {
+        UIImage *background = [UIImage imageNamed:@"table_cell_bottom.png"];
+        return [background resizableImageWithCapInsets:
+                UIEdgeInsetsMake(0.0, 34.0, 0.0, 34.0)];
+    }
+    else //  REUSE_ID_MIDDLE
+    {
+        UIImage *background = [UIImage imageNamed:@"table_cell_mid.png"];
+        return [background resizableImageWithCapInsets:
+                UIEdgeInsetsMake(0.0, 30.0, 0.0, 30.0)];
+    }
+}
+
+- (UIImage *)selectedBackgroundImageForRowAtIndexPath:(NSIndexPath *)
+indexPath
+{
+    NSString *reuseID = [self reuseIdentifierForRowAtIndexPath:indexPath];
+    if ([REUSE_ID_SINGLE isEqualToString:reuseID] == YES)
+    {
+        UIImage *background = [UIImage imageNamed:@"table_cell_single_sel.png"];
+        return [background resizableImageWithCapInsets:
+                UIEdgeInsetsMake(0.0, 43.0, 0.0, 64.0)];
+    }
+    else if ([REUSE_ID_TOP isEqualToString:reuseID] == YES)
+    {
+        UIImage *background = [UIImage imageNamed:@"table_cell_top_sel.png"];
+        return [background resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 43.0, 0.0, 64.0)];
+    }
+    else if ([REUSE_ID_BOTTOM isEqualToString:reuseID] == YES)
+    {
+        UIImage *background = [UIImage imageNamed:@"table_cell_bottom_sel.png"];
+        return [background resizableImageWithCapInsets:
+                UIEdgeInsetsMake(0.0, 34.0, 0.0, 35.0)];
+    }
+    else // REUSE_ID_MIDDLE
+    {
+        UIImage *background = [UIImage imageNamed:@"table_cell_mid_sel.png"];
+        return [background resizableImageWithCapInsets:
+                UIEdgeInsetsMake(0.0, 30.0, 0.0, 30.0)];
+    }
+}
+
+
 - (void)configureCell:(CustomCell *)cell
     forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -128,6 +195,15 @@ NSString * const REUSE_ID_SINGLE = @"SingleRow";
      [self tripPhotoForRowAtIndexPath:indexPath]]; 
     [[cell tripName] setText:
     [self tripNameForRowAtIndexPath:indexPath]]; 
+    
+    CGRect cellRect = [cell frame]; UIImageView *backgroundView =
+    [[UIImageView alloc] initWithFrame:cellRect]; 
+    [backgroundView setImage: [self backgroundImageForRowAtIndexPath:indexPath]]; 
+    [cell setBackgroundView:backgroundView];
+    UIImageView *selectedBackgroundView = [[UIImageView alloc] initWithFrame:cellRect];
+    [selectedBackgroundView setImage:
+     [self selectedBackgroundImageForRowAtIndexPath:indexPath]];
+    [cell setSelectedBackgroundView:selectedBackgroundView];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
