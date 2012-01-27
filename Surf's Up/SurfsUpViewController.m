@@ -18,10 +18,17 @@
 
 #import "DetailViewController.h"
 #import "PlaceholderViewController.h"
+#import "CustomCell.h"
+
+// Add constants for each of our reuse identifiers, right after the imports (we added these in Interface Builder earlier)
+NSString * const REUSE_ID_TOP = @"TopRow";
+NSString * const REUSE_ID_MIDDLE = @"MiddleRow";
+NSString * const REUSE_ID_BOTTOM = @"BottomRow"; 
+NSString * const REUSE_ID_SINGLE = @"SingleRow";
 
 @implementation SurfsUpViewController
 
-#pragma mark - Private behavior and "Model" methods
+#pragma mark - Private behavior and "Model" methodz
 
 - (NSString *)tripNameForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -30,12 +37,15 @@
         case 0:
             return @"Kuta, Bali";
             break;
+            
         case 1:
             return @"Lagos, Portugal";
             break;
+            
         case 2:
             return @"Waikiki, Hawaii";
             break;
+            
     }
     return @"-";
 }
@@ -57,15 +67,39 @@
     return nil;
 }
 
+// adding method for integrating new nibs
+- (void)registerNIBs
+{
+    NSBundle *classBundle = [NSBundle bundleForClass: [CustomCell class]];
+    
+    UINib *topNib = [UINib nibWithNibName:REUSE_ID_TOP bundle:classBundle];
+    [[self tableView] registerNib:topNib forCellReuseIdentifier:REUSE_ID_TOP];
+    
+    UINib *middleNib = [UINib nibWithNibName:REUSE_ID_MIDDLE bundle:classBundle];
+    [[self tableView] registerNib:middleNib forCellReuseIdentifier:REUSE_ID_MIDDLE];
+    
+    UINib *bottomNib = [UINib nibWithNibName:REUSE_ID_BOTTOM bundle:classBundle];
+    [[self tableView] registerNib:bottomNib forCellReuseIdentifier:REUSE_ID_BOTTOM];
+    
+    UINib *singleNib = [UINib nibWithNibName:REUSE_ID_SINGLE bundle:classBundle];
+    [[self tableView] registerNib:singleNib forCellReuseIdentifier:REUSE_ID_SINGLE];
+
+}
+
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //James, the two lines below were removed from the method "registerNibs". This
+    //was causing the loop I spotted when in the debug session with you.
+
+    // add to the end of viewDidLoad
+    [self registerNIBs];
 }
 
-<<<<<<< master
-=======
 // adding code to register our NIB for use
 - (NSString *)reuseIdentifierForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -87,13 +121,82 @@
     return REUSE_ID_MIDDLE;
 }
 
+- (UIImage *)backgroundImageForRowAtIndexPath:
+    (NSIndexPath *)indexPath
+{
+        NSString *reuseID =
+    [self reuseIdentifierForRowAtIndexPath:indexPath];
+    if ([REUSE_ID_SINGLE isEqualToString:reuseID] == YES)
+    {
+        UIImage *background = [UIImage imageNamed:@"table_cell_single.png"];
+        return [background resizableImageWithCapInsets:
+                UIEdgeInsetsMake(0.0, 43.0, 0.0, 64.0)];
+    }
+    else if ([REUSE_ID_TOP isEqualToString:reuseID] == YES)
+    {
+        UIImage *background = [UIImage imageNamed:@"table_cell_top.png"];
+        return [background resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 43.0, 0.0, 64.0)];
+    }
+    else if ([REUSE_ID_BOTTOM isEqualToString:reuseID] == YES)
+    {
+        UIImage *background = [UIImage imageNamed:@"table_cell_bottom.png"];
+        return [background resizableImageWithCapInsets:
+                UIEdgeInsetsMake(0.0, 34.0, 0.0, 34.0)];
+    }
+    else //  REUSE_ID_MIDDLE
+    {
+        UIImage *background = [UIImage imageNamed:@"table_cell_mid.png"];
+        return [background resizableImageWithCapInsets:
+                UIEdgeInsetsMake(0.0, 30.0, 0.0, 30.0)];
+    }
+}
+
+- (UIImage *)selectedBackgroundImageForRowAtIndexPath:(NSIndexPath *)
+indexPath
+{
+    NSString *reuseID = [self reuseIdentifierForRowAtIndexPath:indexPath];
+    if ([REUSE_ID_SINGLE isEqualToString:reuseID] == YES)
+    {
+        UIImage *background = [UIImage imageNamed:@"table_cell_single_sel.png"];
+        return [background resizableImageWithCapInsets:
+                UIEdgeInsetsMake(0.0, 43.0, 0.0, 64.0)];
+    }
+    else if ([REUSE_ID_TOP isEqualToString:reuseID] == YES)
+    {
+        UIImage *background = [UIImage imageNamed:@"table_cell_top_sel.png"];
+        return [background resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 43.0, 0.0, 64.0)];
+    }
+    else if ([REUSE_ID_BOTTOM isEqualToString:reuseID] == YES)
+    {
+        UIImage *background = [UIImage imageNamed:@"table_cell_bottom_sel.png"];
+        return [background resizableImageWithCapInsets:
+                UIEdgeInsetsMake(0.0, 34.0, 0.0, 35.0)];
+    }
+    else // REUSE_ID_MIDDLE
+    {
+        UIImage *background = [UIImage imageNamed:@"table_cell_mid_sel.png"];
+        return [background resizableImageWithCapInsets:
+                UIEdgeInsetsMake(0.0, 30.0, 0.0, 30.0)];
+    }
+}
+
+
 - (void)configureCell:(CustomCell *)cell
-forRowAtIndexPath:(NSIndexPath *)indexPath
+    forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [[cell tripPhoto] setImage:
-     [self tripPhotoForRowAtIndexPath:indexPath]];
+     [self tripPhotoForRowAtIndexPath:indexPath]]; 
     [[cell tripName] setText:
-     [self tripNameForRowAtIndexPath:indexPath]];
+    [self tripNameForRowAtIndexPath:indexPath]]; 
+    
+    CGRect cellRect = [cell frame]; UIImageView *backgroundView =
+    [[UIImageView alloc] initWithFrame:cellRect]; [backgroundView setImage:
+                                                   [self backgroundImageForRowAtIndexPath:indexPath]]; 
+    [cell setBackgroundView:backgroundView];
+    UIImageView *selectedBackgroundView = [[UIImageView alloc] initWithFrame:cellRect];
+    [selectedBackgroundView setImage:
+     [self selectedBackgroundImageForRowAtIndexPath:indexPath]];
+    [cell setSelectedBackgroundView:selectedBackgroundView];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -102,11 +205,10 @@ cellForRowAtIndexPath:(NSIndexPath *)indexPath
     NSString *reuseID = [self reuseIdentifierForRowAtIndexPath:indexPath];
     UITableViewCell *cell = [[self tableView]
                              dequeueReusableCellWithIdentifier:reuseID];
-    
     [self configureCell:(CustomCell *)cell forRowAtIndexPath:indexPath];
+    
     return cell;
 }
->>>>>>> local
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -119,7 +221,7 @@ cellForRowAtIndexPath:(NSIndexPath *)indexPath
     return 3;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+/*- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -133,6 +235,7 @@ cellForRowAtIndexPath:(NSIndexPath *)indexPath
     
     return cell;
 }
+*/
 
 #pragma mark - UITableViewDelegate
 
