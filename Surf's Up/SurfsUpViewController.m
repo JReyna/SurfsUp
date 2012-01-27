@@ -64,6 +64,49 @@
     [super viewDidLoad];
 }
 
+<<<<<<< master
+=======
+// adding code to register our NIB for use
+- (NSString *)reuseIdentifierForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger rowCount = [self tableView:[self tableView] numberOfRowsInSection:0];
+    NSInteger rowIndex = indexPath.row;
+    
+    if (rowCount == 1)
+    {
+        return REUSE_ID_SINGLE;
+    }
+    if (rowIndex == 0)
+    {
+        return REUSE_ID_TOP;
+    }
+    if (rowIndex == (rowCount -1))
+    {
+        return REUSE_ID_BOTTOM;
+    }
+    return REUSE_ID_MIDDLE;
+}
+
+- (void)configureCell:(CustomCell *)cell
+forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[cell tripPhoto] setImage:
+     [self tripPhotoForRowAtIndexPath:indexPath]];
+    [[cell tripName] setText:
+     [self tripNameForRowAtIndexPath:indexPath]];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *reuseID = [self reuseIdentifierForRowAtIndexPath:indexPath];
+    UITableViewCell *cell = [[self tableView]
+                             dequeueReusableCellWithIdentifier:reuseID];
+    
+    [self configureCell:(CustomCell *)cell forRowAtIndexPath:indexPath];
+    return cell;
+}
+>>>>>>> local
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
