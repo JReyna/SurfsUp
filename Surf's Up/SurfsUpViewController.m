@@ -121,12 +121,23 @@ NSString * const REUSE_ID_SINGLE = @"SingleRow";
     return REUSE_ID_MIDDLE;
 }
 
+- (void)configureCell:(CustomCell *)cell
+    forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[cell tripPhoto] setImage:
+     [self tripPhotoForRowAtIndexPath:indexPath]]; 
+    [[cell tripName] setText:
+    [self tripNameForRowAtIndexPath:indexPath]]; 
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
 cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *reuseID = [self reuseIdentifierForRowAtIndexPath:indexPath];
     UITableViewCell *cell = [[self tableView]
                              dequeueReusableCellWithIdentifier:reuseID];
+    [self configureCell:(CustomCell *)cell forRowAtIndexPath:indexPath];
+    
     return cell;
 }
 #pragma mark - UITableViewDataSource
